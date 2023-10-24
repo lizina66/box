@@ -6,7 +6,7 @@ html::after, body::after {
     content: ' ';
     background-repeat: no-repeat;
     background-size: 250px;
-    background-image: url('https://cdn.jsdelivr.net/gh/lizina66/box@main/acgapi/remram.gif') !important;
+    background-image: url('https://jsd.cdn.zzko.cn/gh/lizina66/box@main/acgapi/remram.gif') !important;
     width: 125px;
     background-position: -125px bottom;
     pointer-events: none;
