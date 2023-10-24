@@ -1,0 +1,18 @@
+@media (min-width: 1420px){
+html::after, body::after {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    content: ' ';
+    background-repeat: no-repeat;
+    background-size: 250px;
+    background-image: url('https://cdn.jsdelivr.net/gh/lizina66/box@main/acgapi/remram.gif') !important;
+    width: 125px;
+    background-position: -125px bottom;
+    pointer-events: none;
+}
+body::after {
+    background-position: 0 bottom;
+    right: 0;
+}
+}
