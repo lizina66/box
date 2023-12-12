@@ -1,0 +1,75 @@
+<?php
+// 指定的文件夹和文件
+$folders = array('AI自适应' => 'ai', 'AI移动端' => 'aimp', '白底PC端' => 'bd', '风景PC端' => 'fj', '萌图自适应' => 'moez', '萌图PC端' => 'moe', '萌图移动端' => 'moemp', '普通自适应' => 'ycy', '普通PC端' => 'pc', '普通移动端' => 'mp', '普通头像' => 'tx', '小狐狸头像' => 'xhl', '七濑胡桃头像' => 'lai', '原神自适应' => 'ysz', '原神PC端' => 'ys', '原神移动端' => 'ysmp');
+$txtFiles = array('通用PC' =>'pc.txt', '移动端' =>'mp.txt');
+
+// 处理表单提交
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // 获取用户输入
+    $selectedFolder = $_POST['folder'];
+    $selectedFile = $_POST['file'];
+    $linkInput = $_POST['link'];
+
+    // 验证输入
+    if (!empty($selectedFolder) && !empty($selectedFile) && !empty($linkInput)) {
+        // 构建文件路径
+        $folderPath = $folders[$selectedFolder];
+        $filePath = $folderPath . '/' . $selectedFile;
+
+        // 将链接写入文件
+        file_put_contents($filePath, $linkInput . PHP_EOL, FILE_APPEND);
+    }
+}
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>后台管理 | 次元API</title>
+    <link rel="shortcut icon" href="https://tc.mwm.moe/favicon.ico" type="image/x-icon">
+    <link href="https://jsd.cdn.zzko.cn/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://jsd.cdn.zzko.cn/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/mhDoLbDldZc3qpsJHpLogda//BVZbgYuw6kof4u2FrCedxOtgRZDTHgHUhOCVim" crossorigin="anonymous"></script>
+<script src="https://jsd.cdn.zzko.cn/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+<script src="https://jsd.cdn.zzko.cn/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-ep+dxp/oz2RKF89ALMPGc7Z89QFa32C8Uv1A3TcEK8sMzXVysblLA3+eJWTzPJzT" crossorigin="anonymous"></script>
+</head>
+<body style="margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 1000px;
+    overflow: hidden;background-image: url('https://t.mwm.moe/fj');
+  background-size: cover;
+  background-repeat: no-repeat;
+background-position: center;">
+   <div class="px-4 py-5 my-5 text-center">
+    <h2>添加链接</h2>
+    <form method="POST" action="">
+        <label for="folder">选择文件夹：</label>
+        <select style="opacity: 0.8;" class="p-2 mb-2 bg-light border-bottom" name="folder" id="folder">
+            <?php
+                foreach ($folders as $key => $folder) {
+                    echo "<option value='$key'>$key</option>";
+                }
+            ?>
+        </select>
+
+        <label  for="file">选择文件：</label>
+        <select style="opacity: 0.8;" class="p-2 mb-2 bg-light border-bottom" name="file" id="file">
+            <?php
+                foreach ($txtFiles as $key => $file) {
+                    echo "<option value='$file'>$key</option>";
+                }
+            ?>
+        </select>
+
+        <label for="link">输入链接地址：</label>
+        <br>
+        <textarea style="opacity: 0.8;"  type="text" name="link" id="link" rows="10" cols="80" required></textarea>
+        <br>
+        <button class="btn btn-primary mt-2 mt-xl-0" type="submit">提交</button>
+    </form>
+    </div>
+</body>
+</html>
